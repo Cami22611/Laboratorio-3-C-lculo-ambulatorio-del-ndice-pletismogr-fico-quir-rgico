@@ -43,3 +43,6 @@ El procedimiento se desarrolló siguiendo los tiempos establecidos en la guía, 
 Posteriormente, se dio inicio a la fase de estímulo, en la cual se colocó la bolsa con hielo sobre la mano del voluntario durante 40 segundos, manteniendo la adquisición continua de la señal. Este estímulo térmico induce la activación del sistema nervioso simpático, lo que se traduce en fenómenos como vasoconstricción periférica y cambios en la frecuencia cardíaca, afectando directamente la forma y amplitud de la señal fotopletismográfica.
 
 Finalmente, se retiró la bolsa de hielo y se continuó con la adquisición durante los 40 segundos restantes, correspondientes a la fase de recuperación. En esta etapa se buscó observar el retorno progresivo de las variables fisiológicas hacia sus valores basales, evidenciando la disminución de los efectos provocados por el estímulo frío. Durante todo el experimento la señal fue registrada de manera continua, lo que permitió analizar su comportamiento en cada fase y utilizarla posteriormente para el cálculo del índice SPI.
+
+# IMPLEMENTACIÓN DEL SISTEMA
+
