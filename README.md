@@ -344,3 +344,34 @@ El sistema desarrollado permite evidenciar de manera cualitativa la relación en
 No obstante, el sistema presenta varias limitaciones importantes. En primer lugar, la detección de máximos y mínimos mediante el método del alpinista no es completamente robusta frente al ruido y las variaciones de la señal, lo que genera errores en el cálculo de la amplitud de pulso. En segundo lugar, la normalización empleada depende fuertemente de la fase de calibración inicial, por lo que cualquier variación en esta etapa afecta el resultado global. Adicionalmente, factores como el movimiento del dedo, la presión sobre el sensor y la perfusión periférica influyen directamente en la calidad de la señal adquirida.
 
 Por otra parte, el SPI implementado en este sistema no corresponde al índice clínico real, ya que este último se basa en modelos más complejos y en la integración de múltiples variables fisiológicas. Por esta razón, el sistema no debe considerarse como una herramienta precisa para cuantificar el dolor, sino como una aproximación experimental que permite observar tendencias generales.
+
+# Respuesta a las preguntas planteadas en la práctica
+## Pregunta 1: ¿Cómo se relacionan las variaciones del volumen sanguíneo periférico con el balance autonómico? 
+
+Las variaciones del volumen sanguíneo periférico están directamente relacionadas con el balance del sistema nervioso autónomo, el cual está compuesto por los sistemas simpático y parasimpático. En condiciones de reposo, predomina la actividad parasimpática, lo que favorece la vasodilatación y permite un mayor flujo sanguíneo en los tejidos periféricos. Esto se traduce en una señal PPG con mayor amplitud, ya que existe una mayor cantidad de sangre circulando en los capilares.
+
+Por el contrario, ante estímulos de estrés o dolor, como el Cold Pressor Test, se activa el sistema nervioso simpático, provocando vasoconstricción periférica. Este fenómeno reduce el volumen sanguíneo en la periferia y, en consecuencia, disminuye la amplitud de la señal PPG. Estas variaciones son precisamente las que permiten estimar índices como el SPI, ya que reflejan cambios en el tono vascular y en la dinámica cardiovascular asociados al balance autonómico.
+
+En resumen, un aumento del tono simpático disminuye el volumen sanguíneo periférico y la amplitud de la señal, mientras que un predominio parasimpático genera el efecto contrario.
+
+## Pregunta 2:  ¿Cómo se compara el SPI con otros índices comúnmente empleados en cirugía, como el índice nocicepción-analgesia (ANI) y el índice de perfusión? 
+
+El SPI, el ANI y el índice de perfusión son parámetros utilizados para evaluar la respuesta fisiológica del paciente, pero difieren en las variables que emplean y en su aplicación clínica.
+
+El SPI (Surgical Pleth Index) se basa principalmente en variables derivadas de la señal fotopletismográfica, como la amplitud del pulso y el intervalo entre latidos, reflejando la actividad del sistema nervioso simpático. Se utiliza para estimar el nivel de nocicepción durante procedimientos quirúrgicos, especialmente en pacientes bajo anestesia general.
+
+Por otro lado, el ANI (Analgesia Nociception Index) se fundamenta en el análisis de la variabilidad de la frecuencia cardíaca, particularmente en la modulación parasimpática. Este índice proporciona información sobre el equilibrio entre analgesia y nocicepción desde una perspectiva más centrada en la actividad vagal, siendo complementario al SPI.
+
+El índice de perfusión, en cambio, es una medida directa de la relación entre el componente pulsátil y no pulsátil de la señal PPG, y se utiliza para evaluar la calidad de la perfusión periférica. A diferencia del SPI y el ANI, no está diseñado específicamente para medir dolor, sino para indicar el estado del flujo sanguíneo en los tejidos.
+
+En conjunto, estos índices ofrecen información complementaria: el SPI refleja predominantemente la activación simpática, el ANI la actividad parasimpática, y el índice de perfusión el estado hemodinámico periférico. Por esta razón, en entornos clínicos pueden utilizarse de manera conjunta para obtener una evaluación más completa del estado del paciente.
+# CONCLUSIONES
+El desarrollo de la práctica permitió implementar un sistema completo para la adquisición y procesamiento de la señal fotopletismográfica utilizando un sensor óptico y una plataforma de microcontrolador. Se logró obtener una señal con comportamiento periódico característico del pulso sanguíneo, lo que valida el correcto funcionamiento del sistema de adquisición y la comunicación con MATLAB.
+
+A partir de la señal adquirida fue posible estimar variables fisiológicas como la amplitud de pulso (PPGA) y el intervalo entre latidos (HBI), las cuales sirvieron como base para el cálculo del índice SPI. Este proceso permitió evidenciar la relación entre la señal PPG y la actividad del sistema nervioso autónomo, especialmente en el contexto de estímulos como el Cold Pressor Test.
+
+Sin embargo, se identificaron limitaciones importantes en la etapa de procesamiento, particularmente en la detección de los mínimos (valles) de la señal. La inconsistencia en la identificación de estos puntos generó errores en el cálculo de la amplitud de pulso, lo cual afectó directamente la precisión del SPI. Esto demuestra que la calidad del análisis depende en gran medida de la robustez del algoritmo de detección de eventos.
+
+Asimismo, se evidenció que el SPI implementado corresponde a una aproximación simplificada del índice clínico real, por lo que los resultados obtenidos deben interpretarse de manera cualitativa. A pesar de ello, el sistema permitió observar tendencias generales en la señal y comprender el impacto de la activación simpática sobre las variables cardiovasculares.
+
+En conclusión, el trabajo desarrollado cumple con el objetivo de modelar y analizar una señal fisiológica real, integrando conceptos de instrumentación biomédica, procesamiento de señales y fisiología. No obstante, se hace evidente la necesidad de mejorar los métodos de detección y procesamiento para obtener resultados más precisos y confiables, especialmente si se pretende acercarse a aplicaciones clínicas.
