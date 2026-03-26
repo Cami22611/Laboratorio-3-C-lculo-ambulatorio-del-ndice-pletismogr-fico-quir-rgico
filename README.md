@@ -45,4 +45,77 @@ Posteriormente, se dio inicio a la fase de estímulo, en la cual se colocó la b
 Finalmente, se retiró la bolsa de hielo y se continuó con la adquisición durante los 40 segundos restantes, correspondientes a la fase de recuperación. En esta etapa se buscó observar el retorno progresivo de las variables fisiológicas hacia sus valores basales, evidenciando la disminución de los efectos provocados por el estímulo frío. Durante todo el experimento la señal fue registrada de manera continua, lo que permitió analizar su comportamiento en cada fase y utilizarla posteriormente para el cálculo del índice SPI.
 
 # IMPLEMENTACIÓN DEL SISTEMA
+## Programación del microcontrolador 
 
+´´´
+#include <Wire.h>
+#include "MAX30105.h"
+
+MAX30105 particleSensor;
+
+float dc = 0.0;
+const float alpha = 0.95;
+
+void setup() {
+  Serial.begin(115200);
+  delay(1000);
+  Wire.begin(21, 22);
+
+  if (!particleSensor.begin(Wire, I2C_SPEED_STANDARD)) {
+    Serial.println("MAX30105 no encontrado");
+    while (1);
+  }
+
+  byte ledBrightness = 0x1F;
+  byte sampleAverage = 4;
+  byte ledMode = 2;
+  int sampleRate = 100;
+  int pulseWidth = 411;
+  int adcRange = 4096;
+
+  particleSensor.setup(ledBrightness, sampleAverage, ledMode, sampleRate, pulseWidth, adcRange);
+
+  particleSensor.setPulseAmplitudeRed(0x00);
+  particleSensor.setPulseAmplitudeIR(0x1F);
+  particleSensor.setPulseAmplitudeGreen(0x00);
+}
+
+void loop() {
+  long irValue = particleSensor.getIR();
+
+  if (dc == 0) {
+    dc = irValue;
+  }
+
+  dc = alpha * dc + (1.0 - alpha) * irValue;
+  float ac = irValue - dc;
+  float ppg = -ac;
+
+  Serial.println(ppg);
+
+  delay(10);
+}
+´´´
+El código implementado tiene como objetivo la adquisición de la señal fotopletismográfica (PPG) utilizando el módulo MAX30102 conectado a una ESP32 mediante comunicación I2C, empleando los pines GPIO 21 (SDA) y GPIO 22 (SCL). Inicialmente, se establece la comunicación serial a 115200 baudios y se configura el sensor con una frecuencia de muestreo de 100 Hz, utilizando únicamente el canal infrarrojo para la captura de la señal.
+
+La señal obtenida directamente del sensor contiene una componente continua elevada asociada a las condiciones de iluminación y al tejido, por lo que se aplica un filtrado sencillo basado en un promedio exponencial para estimar y eliminar dicha componente. De esta forma se obtiene una señal centrada en cero que resalta las variaciones pulsátiles del flujo sanguíneo. Posteriormente, la señal es invertida con el fin de facilitar la identificación de los picos correspondientes a cada latido durante el procesamiento posterior.
+
+Finalmente, la señal procesada se envía por el puerto serial a una tasa aproximada de 100 muestras por segundo, permitiendo su visualización en tiempo real y su posterior análisis en MATLAB.
+
+### Librerías utilizadas
+
+Para la implementación del sistema fue necesario instalar la siguiente librería en el entorno de Arduino:
+
+SparkFun MAX3010x Pulse and Proximity Sensor Library
+
+Adicionalmente, se emplea la librería estándar:
+
+Wire.h, utilizada para la comunicación I2C entre la ESP32 y el sensor
+
+## Señal en el serial plotter
+
+<img width="1182" height="736" alt="image" src="https://github.com/user-attachments/assets/d5be33b8-49cf-4b92-a408-f10bb26951bc" />
+
+La gráfica obtenida en el Serial Plotter presenta una forma periódica compatible con la señal fotopletismográfica procesada. Se observan picos pronunciados hacia valores positivos y valles en la región negativa, lo cual indica que la componente continua fue removida y que la señal fue invertida correctamente para resaltar el pulso hacia arriba. Esta representación resulta adecuada para identificar máximos y mínimos de cada latido, que posteriormente serán utilizados para calcular la amplitud de pulso y el intervalo entre latidos.
+
+La forma no sinusoidal de la señal es esperable, ya que la PPG real depende de la dinámica del flujo sanguíneo, la presión del dedo sobre el sensor, el nivel de perfusión periférica y pequeñas variaciones por movimiento. Aun así, la presencia de pulsos repetitivos y distinguibles indica que la adquisición es funcional y que la señal es apta para el análisis posterior en MATLAB.
