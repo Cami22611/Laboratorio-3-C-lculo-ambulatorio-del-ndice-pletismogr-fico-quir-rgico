@@ -375,3 +375,15 @@ Sin embargo, se identificaron limitaciones importantes en la etapa de procesamie
 Asimismo, se evidenció que el SPI implementado corresponde a una aproximación simplificada del índice clínico real, por lo que los resultados obtenidos deben interpretarse de manera cualitativa. A pesar de ello, el sistema permitió observar tendencias generales en la señal y comprender el impacto de la activación simpática sobre las variables cardiovasculares.
 
 En conclusión, el trabajo desarrollado cumple con el objetivo de modelar y analizar una señal fisiológica real, integrando conceptos de instrumentación biomédica, procesamiento de señales y fisiología. No obstante, se hace evidente la necesidad de mejorar los métodos de detección y procesamiento para obtener resultados más precisos y confiables, especialmente si se pretende acercarse a aplicaciones clínicas.
+# REFERENCIAS
+- Huiku, M., Uutela, K., van Gils, M., et al. (2007). Assessment of surgical stress during general anaesthesia. British Journal of Anaesthesia, 98(4), 447–455. https://doi.org/10.1093/bja/aem029
+- Wennervirta, J., Hynynen, M., Koivusalo, A. M., et al. (2008). Surgical stress index as a measure of nociception during general anesthesia. British Journal of Anaesthesia, 101(3), 386–392. https://doi.org/10.1093/bja/aen173
+- Allen, J. (2007). Photoplethysmography and its application in clinical physiological measurement. Physiological Measurement, 28(3), R1–R39. https://doi.org/10.1088/0967-3334/28/3/R01
+- Tamura, T., Maeda, Y., Sekine, M., & Yoshida, M. (2014). Wearable photoplethysmographic sensors—past and present. Electronics, 3(2), 282–302. https://doi.org/10.3390/electronics3020282
+- Guyton, A. C., & Hall, J. E. (2016). Tratado de fisiología médica (13ª ed.). Elsevier.  https://www.elsevier.com/books/guyton-and-hall-textbook-of-medical-physiology/hall/978-0-323-59712-8
+- Berne, R. M., & Levy, M. N. (2018). Fisiología (7ª ed.). Elsevier. https://www.elsevier.com/books/berne-and-levy-physiology/koepchen/978-0-323-39394-2
+- Jeanne, M., Logier, R., De Jonckheere, J., & Tavernier, B. (2012). Heart rate variability during total intravenous anesthesia: effects of nociception and analgesia. Autonomic Neuroscience, 168(1–2), 91–96. https://doi.org/10.1016/j.autneu.2011.10.004
+
+# INTEGRANTES 
+Isabel Sofía Maldonado Roa y María Camila Martínez Ramírez
+
